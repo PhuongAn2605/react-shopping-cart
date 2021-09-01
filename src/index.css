@@ -73,6 +73,7 @@ footer{
 a{
   text-decoration: none;
 }
+
 /* products */
 .products{
   display: flex;
@@ -132,4 +133,18 @@ a{
 
 .button.primary{
   background-color: #ffc040;
+}
+
+/* Filter */
+.filter{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+  border-bottom: 0.1rem #c0c0c0 solid;
+}
+
+.filter div{
+  /* create same size for 3 components */
+  flex: 1;
 }
