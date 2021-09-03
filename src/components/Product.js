@@ -1,8 +1,12 @@
+  //do not need prefix for each request
+
 import React, { Component } from 'react';
 import Modal from "react-modal";
 import Fade from 'react-reveal/Fade';
 import Zoom from "react-reveal/Zoom";
+import { fetchProducts } from '../actions/productActions';
 import formatCurrency from '../util';
+import { connect } from 'react-redux';
 
 class Product extends Component {
     constructor(props){
@@ -11,6 +15,10 @@ class Product extends Component {
             product: null
 
         }
+    }
+
+    componentDidMount(){
+        fetchProducts();
     }
 
     openModal = (product) => {
@@ -26,6 +34,9 @@ class Product extends Component {
         return (
             <div>
                 <Fade bottom cascade>
+                    {
+                        !this.props.products ? (<div>Loading...</div>)
+                        : (
                     <ul className="products">
                         {this.props.products.map(product => (
                             <li key={product._id}>
@@ -43,6 +54,8 @@ class Product extends Component {
                             </li>
                         ))}
                     </ul>
+
+                        )}
                 </Fade>
                 {
                     product && (
@@ -72,8 +85,8 @@ class Product extends Component {
                                         <div>
                                             {formatCurrency(product.price)}
                                         </div>
-                                        <button className="button primary" onClick={() => {
-                                            this.props.addToCart(product);
+                                        <button className="button primary" onClick={(e) => {
+                                            this.props.addToCart(this.props.cartItems, product);
                                             this.closeModal();
                                             }}>Add to cart</button>
                                     </div>
@@ -88,4 +101,14 @@ class Product extends Component {
     }
 }
 
-export default Product;
+const mapStateToProps = (state) => ({
+    products: state.products.filteredItems
+});
+
+// const mapDispatchToProps = () => ({
+//     fetchProducts: fetchProducts
+// })
+
+
+//Product: name of parameter
+export default connect(mapStateToProps, fetchProducts)(Product);
