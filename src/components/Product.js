@@ -19,7 +19,7 @@ class Product extends Component {
     }
 
     componentDidMount(){
-        fetchProducts();
+        this.props.fetchProducts();
     }
 
     openModal = (product) => {
