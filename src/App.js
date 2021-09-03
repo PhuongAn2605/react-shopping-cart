@@ -10,40 +10,40 @@ import { Provider } from 'react-redux';
 
 class App extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      // products: data.products,
-      cartItems: localStorage.getItem("cart-items") ? JSON.parse(localStorage.getItem("cart-items")) : [],
-      // size: "",
-      // sort: ""
-    }
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     // products: data.products,
+  //     cartItems: localStorage.getItem("cart-items") ? JSON.parse(localStorage.getItem("cart-items")) : [],
+  //     // size: "",
+  //     // sort: ""
+  //   }
+  // }
 
-  removeFromCart = (product) => {
-    const cartItems = this.state.cartItems.slice();
-    this.setState({
-      cartItems: cartItems.filter((x) => x._id !== product._id)
-    });
-    localStorage.setItem("cart-items", JSON.stringify(cartItems.filter((x) => x._id !== product._id)));
+  // removeFromCart = (product) => {
+  //   const cartItems = this.state.cartItems.slice();
+  //   this.setState({
+  //     cartItems: cartItems.filter((x) => x._id !== product._id)
+  //   });
+  //   localStorage.setItem("cart-items", JSON.stringify(cartItems.filter((x) => x._id !== product._id)));
 
-  }
+  // }
 
-  addToCart = (product) => {
-    const cartItems = this.state.cartItems.slice();
-    let alreadyInCart = false;
-    cartItems.forEach(item => {
-      if (item._id === product._id) {
-        item.count++;
-        alreadyInCart = true;
-      }
-    });
-    if (!alreadyInCart) {
-      cartItems.push({ ...product, count: 1 })
-    }
-    this.setState({ cartItems: cartItems });
-    localStorage.setItem("cart-items", JSON.stringify(cartItems));
-  }
+  // addToCart = (product) => {
+  //   const cartItems = this.state.cartItems.slice();
+  //   let alreadyInCart = false;
+  //   cartItems.forEach(item => {
+  //     if (item._id === product._id) {
+  //       item.count++;
+  //       alreadyInCart = true;
+  //     }
+  //   });
+  //   if (!alreadyInCart) {
+  //     cartItems.push({ ...product, count: 1 })
+  //   }
+  //   this.setState({ cartItems: cartItems });
+  //   localStorage.setItem("cart-items", JSON.stringify(cartItems));
+  // }
 
   // filterProducts = (event) => {
 
@@ -59,9 +59,9 @@ class App extends React.Component {
 
   // }
 
-  createOrder = (order) => {
-    alert("Need to save order for " + order.name);
-  }
+  // createOrder = (order) => {
+  //   alert("Need to save order for " + order.name);
+  // }
 
   // sortProducts = (event) => {
   //   // console.log(event.target.value);
@@ -90,13 +90,10 @@ class App extends React.Component {
             <div className="content">
               <div className="main">
                 <Filter />
-                <Product addToCart={this.addToCart} />
+                <Product/>
               </div>
               <div className="sidebar">
-                <Cart cartItems={this.state.cartItems}
-                  removeFromCart={this.removeFromCart}
-                  createOrder={this.createOrder}
-                />
+                <Cart />
               </div>
             </div>
           </main>
